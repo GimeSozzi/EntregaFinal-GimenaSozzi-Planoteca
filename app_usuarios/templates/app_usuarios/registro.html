@@ -1,0 +1,33 @@
+{% extends 'genericos/base.html' %}
+
+{% block title_head %}
+
+<title>Planoteca - Registro</title>
+
+{% endblock title_head %}
+
+{% block h1_header %}
+
+<h1>Registrarse</h1>
+
+{% endblock h1_header %}
+
+{% block contenido %}
+<div class="container my-8">
+    <br> 
+    {% if form.error %}
+    <p>Datos inválidos</p>
+    {% endif %}
+
+    <form action={% url 'app_usuarios:registro' %} method="post">
+        {% csrf_token %}
+        <table>
+            {{form}}
+        </table>
+        <br>
+        <button type="submit" class="btn btn-primary btn-sm">Registrarse</button>
+    </form>
+    <br>
+    <a class="btn btn-secondary btn-sm" href={% url 'app_proyectos:inicio' %} role="submit">Volver</a> 
+</div>
+{% endblock contenido %}

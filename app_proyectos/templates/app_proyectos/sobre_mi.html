@@ -1,0 +1,42 @@
+
+{% extends 'genericos/base.html' %}
+
+{% load static %}
+{% comment %} cargo "load static" para cargar mi imagen desde assets {% endcomment %}
+
+{% block title_head %}
+<title>Planoteca - Sobre mi</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+<h1>Un poco sobre mi...</h1>
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<div class="card mb-1">
+    <div class="row no-gutters">
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <img src="{% static 'app_proyectos/assets/img/gimena.jpg' %}" class="card-img" alt="Foto de Gimena" style="width: 50%">
+      </div>
+      <div class="col-md-3 mt-2">
+        <div class="card-body">
+          <h5 class="card-title">Gimena Sozzi</h5>
+          <p class="card-text">Soy una arquitecta apasionada por el diseño en todas sus formas.
+            <br> 
+            <br> Comencé mi carrera dedicándome a la arquitectura y construcción tradicional, pero con el tiempo descubrí mi interés por la visualización arquitectónica y, luego, por la programación.
+            <br> 
+            <br> Actualmente, estoy estudiando Python y disfruto de cómo la programación puede automatizar tareas y crear herramientas útiles para la vida diaria.
+            <br>
+            <br> Aunque queda un largo y desafiante camino por recorrer, estoy motivada para aprender cada día más, siempre acompañada de una buena taza de café ☕ o mate 🧉, la bebida tradicional de mi país.
+            <br>
+            <div class="mt-auto">
+                <a class="btn btn-secondary btn-sm" href={% url 'app_proyectos:inicio' %} role="submit">Gracias por visitar Planoteca</a>
+            </div>
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock contenido %}

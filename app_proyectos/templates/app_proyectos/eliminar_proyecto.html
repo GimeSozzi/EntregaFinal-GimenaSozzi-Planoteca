@@ -1,0 +1,25 @@
+{% extends 'genericos/base.html' %}
+
+{% block title_head %}
+<title>Planoteca - Eliminar Proyecto</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+<h1>Eliminar Proyecto</h1>
+{% endblock h1_header %}
+
+{% block contenido %}
+<div class="container my-8">
+{% if request.user.is_authenticated %}
+<form action={% url 'app_proyectos:eliminar_proyecto' proyecto.id %} method="POST">
+    {% csrf_token %}
+    <br>
+    <h5> Está seguro que desea eliminar el proyecto {{proyecto}}?</h5>
+    <br>
+    <button type="submit" class="btn btn-primary btn-sm">Eliminar</button>
+</form>
+<br>
+<a class="btn btn-secondary btn-sm" href={% url 'app_proyectos:lista_proyecto' %} role="submit">Volver</a>
+{% endif %}
+</div>
+{% endblock contenido %}

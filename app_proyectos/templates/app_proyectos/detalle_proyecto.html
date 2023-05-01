@@ -1,0 +1,47 @@
+{% extends 'genericos/base.html' %}
+
+{% block title_head %}
+<title>Planoteca - Proyecto</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+<h1>{{object}}</h1>
+{% endblock h1_header %}
+
+{% block contenido %}
+<div class="container my-8">
+  <br>
+  <div class="card mx-auto" style="width: 50%; height: 100%">
+      <img class="card-img-top" src="{{ proyecto.portada.url }}" alt="Card image cap" style="object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title">{{ proyecto.titulo }}</h5>
+        <p class="card-text">{{ proyecto.memoria_descriptiva | safe }}</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Tipología:</strong>  {{ proyecto.tipologia }}</li>
+          <li class="list-group-item"><strong>Superficie:</strong>  {{ proyecto.superficie }} m2</li>
+          <li class="list-group-item"><strong>Plantas:</strong> {{ proyecto.plantas }}</li>
+          <li class="list-group-item"><strong>Dormitorios:</strong> {{ proyecto.dormitorios }}</li>
+          <li class="list-group-item"><strong>Baños:</strong> {{ proyecto.banios }}</li>
+          <li class="list-group-item"><strong>Autor:</strong> {{ proyecto.autor }}</li>
+        </ul>
+        {% if request.user.is_authenticated %}
+          {% if proyecto.planos %}
+              <a href={{proyecto.planos.url}} target="_blank" class="btn btn-secondary">Descargar Planos</a>
+          {% endif %}
+          {% if request.user == proyecto.autor %}
+          <a href={% url 'app_proyectos:editar_proyecto' proyecto.id %} class="btn btn-secondary">Editar</a>
+          <a href={% url 'app_proyectos:eliminar_proyecto' proyecto.id %} class="btn btn-danger">Eliminar</a>
+          {% else %}
+          <a href= {% url 'app_mensajes:enviar_mensaje' proyecto.autor.id %} class="btn btn-primary">Enviar mensaje al autor</a>
+          {% endif %}
+        {% else %}
+          {% if proyecto.planos %}
+          <a href= {% url 'app_usuarios:iniciar_sesion' %} class="btn btn-primary">Descargar Planos</a>
+          {% endif %}
+          <a href= {% url 'app_usuarios:iniciar_sesion' %} class="btn btn-secondary">Enviar mensaje al autor</a>
+        {% endif %}
+      </div>
+  </div>
+  <a class="btn btn-secondary btn-sm" href={% url 'app_proyectos:lista_proyecto' %} role="submit">Volver</a>
+</div>
+{% endblock contenido %}
