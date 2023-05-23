@@ -1,4 +1,4 @@
-# Tercera Pre Entrega - Gimena Sozzi
+# Entrega Final - Gimena Sozzi
 # Planoteca
 
 PLANOTECA es un sitio web creado con Django donde los arquitectos pueden subir los planos de sus proyectos arquitectónicos. Los usuarios deben registrarse y, una vez iniciada la sesión, pueden ver los proyectos, descargar los planos, crear, buscar, editar y eliminar proyectos, enviar y recibir mensajes y editar su perfil.
