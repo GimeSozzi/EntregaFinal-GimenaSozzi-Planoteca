@@ -52,6 +52,17 @@ def registro(request):
 
 
 @login_required
+def perfil(request):
+    
+    usuario = request.user
+    info_adicional = InfoAdicional.objects.get_or_create(user=request.user)
+
+    contexto = {'usuario': usuario,'info_adicional': info_adicional}
+    
+    return render(request, 'app_usuarios/perfil.html', contexto)
+
+
+@login_required
 def editar_perfil(request):
 
     if request.method == 'POST':
@@ -62,13 +73,18 @@ def editar_perfil(request):
 
             if formulario.cleaned_data.get('avatar'):
                 request.user.infoadicional.avatar = formulario.cleaned_data.get('avatar')
+                
+            if formulario.cleaned_data.get('pronombres'):
+                request.user.infoadicional.pronombres = formulario.cleaned_data.get('pronombres')
+                
             request.user.infoadicional.save()
+            
             formulario.save()
-            return redirect('app_proyectos:inicio')
+            return redirect('app_usuarios:perfil')
         else:
             return render(request, 'app_usuarios/editar_perfil.html', {'form': formulario})
 
-    formulario = EditarPerfil(initial={'avatar': request.user.infoadicional.avatar}, instance=request.user)
+    formulario = EditarPerfil(initial={'avatar': request.user.infoadicional.avatar, 'pronombres': request.user.infoadicional.pronombres}, instance=request.user)
     return render(request, 'app_usuarios/editar_perfil.html', {'form': formulario})
 
 

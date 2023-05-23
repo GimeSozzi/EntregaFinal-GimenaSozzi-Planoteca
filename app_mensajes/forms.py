@@ -1,12 +1,14 @@
 from django import forms
+from ckeditor.fields import RichTextField
 
 from app_mensajes.models import Mensaje
 
 
 class MensajeForm(forms.ModelForm):
+    mensaje = RichTextField()
     class Meta:
         model = Mensaje
-        fields = ('texto',)
+        fields = ('mensaje',)
 
     def __init__(self, *args, **kwargs):
         conversacion_id = kwargs.pop('conversacion_id', None)

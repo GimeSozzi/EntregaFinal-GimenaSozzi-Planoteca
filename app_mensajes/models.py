@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 class Conversacion(models.Model):
@@ -15,7 +16,7 @@ class Conversacion(models.Model):
 class Mensaje(models.Model):
     emisor = models.ForeignKey(User, related_name='mensajes_enviados',
                                on_delete=models.CASCADE)
-    texto = models.TextField(verbose_name='Mensaje')
+    mensaje = RichTextField()
     enviado = models.DateTimeField(auto_now_add=True)
     conversacion = models.ForeignKey(Conversacion, on_delete=models.CASCADE)
 

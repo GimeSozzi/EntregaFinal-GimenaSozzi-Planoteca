@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
+from app_usuarios.models import InfoAdicional
+
 
 class RegistroFormulario(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
@@ -22,8 +24,9 @@ class EditarPerfil(UserChangeForm):
     first_name = forms.CharField(label='Nombre', max_length=20, widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(label='Apellido', max_length=20, widget=forms.TextInput(attrs={'class': 'form-control'}))
     avatar = forms.ImageField(label='Imagen de Perfil', required=False, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+    pronombres = forms.ChoiceField(label='Pronombres', choices=InfoAdicional.OPCIONES_PRONOMBRES, widget=forms.Select(attrs={'class': 'form-control'}), initial='other')
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'avatar']
-        labels = {'email': 'Correo Electrónico', 'first_name': 'Nombre', 'last_name': 'Apellido', 'avatar': 'Imagen de Perfil'}
+        fields = ['email', 'first_name', 'last_name', 'avatar', 'pronombres']
+        labels = {'email': 'Correo Electrónico', 'first_name': 'Nombre', 'last_name': 'Apellido', 'avatar': 'Imagen de Perfil', 'pronombres': 'Pronombres'}

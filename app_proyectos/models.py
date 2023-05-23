@@ -4,8 +4,16 @@ from ckeditor.fields import RichTextField
 
 
 class Proyecto(models.Model):
+    OPCIONES_TIPOLOGIAS = (
+        ('vivienda unifamiliar', 'Vivienda Unifamiliar'),
+        ('vivienda colectiva', 'Vivienda Colectiva'),
+        ('duplex', 'Duplex'),
+        ('edificio residencial', 'Edificio Residencial'),
+        ('edificio comercial ', 'Edificio Comercial'),
+        ('edificio oficinal', 'Edificio Oficinas')
+    )
     titulo = models.CharField(max_length=30)
-    tipologia = models.CharField(max_length=30)
+    tipologia = models.CharField(max_length=30,choices=OPCIONES_TIPOLOGIAS, default='vivienda unifamiliar', null=True, blank=True) 
     superficie = models.FloatField()
     plantas = models.IntegerField()
     dormitorios = models.IntegerField()

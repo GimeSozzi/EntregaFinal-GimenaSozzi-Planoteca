@@ -19,7 +19,7 @@
     <br> 
     <ul class="list-group">
     {% for mensaje in mensajes %}
-        <li class="list-group-item"> <strong> De:</strong>  {{mensaje.emisor}} | <strong> Mensaje:</strong>  {{mensaje.texto}} | <strong>Enviado:</strong>  {{mensaje.enviado}}</li>
+        <li class="list-group-item"> <strong> De:</strong>  {{mensaje.emisor}} | <strong> Mensaje:</strong>  {{mensaje.mensaje | safe}} | <strong>Enviado:</strong>  {{mensaje.enviado}}</li>
     {% endfor %}
     </ul>
     <br>
@@ -27,6 +27,7 @@
         {% csrf_token %}
         <table>
             {{form}}
+            {{form.media}}
         </table>
         <br>
         <button type="submit" class="btn btn-primary btn-sm">Enviar</button>

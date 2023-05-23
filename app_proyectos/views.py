@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 
 from app_proyectos.models import Proyecto
 from app_proyectos.forms import BuscarProyectoForm
+from app_proyectos.forms import ProyectoForm
 
 
 def inicio(request):
@@ -57,9 +58,8 @@ class DetalleProyecto(DetailView):
 
 
 class CrearProyecto(LoginRequiredMixin, CreateView):
-    model = Proyecto
+    form_class = ProyectoForm
     template_name = 'app_proyectos/crear_proyecto.html'
-    fields = ['titulo', 'tipologia', 'superficie', 'plantas', 'dormitorios', 'banios', 'portada', 'memoria_descriptiva', 'planos']
     success_url = reverse_lazy('app_proyectos:lista_proyecto')
 
     def form_valid(self, form):
