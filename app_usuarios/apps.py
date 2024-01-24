@@ -1,6 +1,9 @@
 from django.apps import AppConfig
-
+from django.db.models.signals import post_migrate
 
 class AppUsuariosConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
     name = 'app_usuarios'
+
+    def ready(self):
+        from . import signals  # Importa los signals de tu app
+

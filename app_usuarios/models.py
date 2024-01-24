@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 class InfoAdicional(models.Model):
     # Se define una tupla con los pronombres disponibles. El primer elemento es el valor que se almacena en la Base de datos y el segundo se mostrará en el formulario.
     OPCIONES_PRONOMBRES = (
@@ -20,3 +19,6 @@ class InfoAdicional(models.Model):
 
     class Meta:
         verbose_name_plural = 'Información Adicional'
+        
+
+

@@ -3,6 +3,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import Group
 from django.urls import reverse_lazy
 
 from app_proyectos.models import Proyecto
@@ -10,8 +11,20 @@ from app_proyectos.forms import BuscarProyectoForm
 from app_proyectos.forms import ProyectoForm
 
 
+# def inicio(request):
+#     return render(request, 'app_proyectos/inicio.html')
+
+
+
 def inicio(request):
-    return render(request, 'app_proyectos/inicio.html')
+    es_administrador = False  # Inicialmente, asumimos que el usuario no es administrador
+
+    if request.user.is_authenticated:
+        # Verifica si el usuario autenticado pertenece al grupo "Administradores"
+        es_administrador = request.user.groups.filter(name='Administradores').exists()
+
+    return render(request, 'app_proyectos/inicio.html', {'es_administrador': es_administrador})
+
 
 
 def buscar_proyecto(request):

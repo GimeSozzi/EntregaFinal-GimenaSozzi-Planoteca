@@ -1,16 +1,12 @@
 {% extends 'genericos/base.html' %}
 
 {% block title_head %}
-
 <title>Planoteca - Perfil</title>
-
 {% endblock title_head %}
 
 {% block h1_header %}
-
 <h2>Perfil de:</h2>
-<h1>{{request.user.username}}</h1>
-
+<h1>{{ request.user.username }}</h1>
 {% endblock h1_header %}
 
 {% block contenido %}
@@ -18,19 +14,23 @@
     <br>
     <div class="card mx-auto" style="width: 50%; height: 100%">
         {% if request.user.is_authenticated %}
-        <img class="card-img-top" src="{{ request.user.infoadicional.avatar.url }}" alt="Card image cap" style="object-fit: cover;">
         <div class="card-body">
-          <h5 class="card-title"> Datos de Usuario</h5>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Usuario:</strong>  {{ request.user.username }}</li>
-            <li class="list-group-item"><strong>Nombre:</strong>  {{ request.user.first_name }}</li>
-            <li class="list-group-item"><strong>Apellido:</strong>  {{ request.user.last_name }}</li>
-            <li class="list-group-item"><strong>Correo Electrónico:</strong> {{ request.user.email }}</li>
-            <li class="list-group-item"><strong>Pronombres:</strong> {{ request.user.infoadicional.get_pronombres_display }}</li>
-          </ul>
-          <a href= {% url 'app_usuarios:editar_perfil' %} class="btn btn-primary btn-sm">Editar Perfil</a>
-        {% endif %}
+            <h5 class="card-title"> Datos de Usuario</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Usuario:</strong>  {{ request.user.username }}</li>
+                <li class="list-group-item"><strong>Nombre:</strong>  {{ request.user.first_name }}</li>
+                <li class="list-group-item"><strong>Apellido:</strong>  {{ request.user.last_name }}</li>
+                <li class="list-group-item"><strong>Correo Electrónico:</strong> {{ request.user.email }}</li>
+                {% if request.user.infoadicional %}
+                    {% if request.user.infoadicional.avatar %}
+                        <li class="list-group-item"><strong>Avatar:</strong> <img src="{{ request.user.infoadicional.avatar.url }}" alt="Avatar" style="max-width: 100px;"></li>
+                    {% endif %}
+                    <li class="list-group-item"><strong>Pronombres:</strong> {{ request.user.infoadicional.get_pronombres_display }}</li>
+                {% endif %}
+            </ul>
+            <a href= {% url 'app_usuarios:editar_perfil' %} class="btn btn-primary btn-sm">Editar Perfil</a>
         </div>
+        {% endif %}
     </div>
     <a class="btn btn-secondary btn-sm" href={% url 'app_proyectos:lista_proyecto' %} role="submit">Volver</a>
 </div>

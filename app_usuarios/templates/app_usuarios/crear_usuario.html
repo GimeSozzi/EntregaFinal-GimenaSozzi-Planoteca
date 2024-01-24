@@ -1,0 +1,52 @@
+{% extends 'genericos/base.html' %}
+
+{% block title_head %}
+<title>Planoteca - Crear Usuario</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+<h1>Crear un nuevo usuario</h1>
+{% endblock h1_header %}
+
+{% block contenido %}
+<div class="container my-8">
+  <form method="post">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        {{ formulario.nombre_completo.label_tag }}
+        {{ formulario.nombre_completo }}
+        {{ formulario.nombre_completo.errors }}
+    </div>
+    
+    <div class="form-group">
+        {{ formulario.username.label_tag }}
+        {{ formulario.username }}
+        {{ formulario.username.errors }}
+    </div>
+    
+    <div class="form-group">
+        {{ formulario.password1.label_tag }}
+        {{ formulario.password1 }}
+        {{ formulario.password1.errors }}
+    </div>
+    
+    <div class="form-group">
+        {{ formulario.password2.label_tag }}
+        {{ formulario.password2 }}
+        {{ formulario.password2.errors }}
+    </div>
+    
+    <div class="form-group">
+        {{ formulario.grupo.label_tag }}
+        {{ formulario.grupo }}
+        {{ formulario.grupo.errors }}
+    </div>
+    
+    <br>
+    <button type="submit" class="btn btn-primary btn-sm">Crear usuario</button>
+  </form>
+  <br>
+  <a class="btn btn-secondary btn-sm" href={% url 'app_proyectos:inicio' %} role="submit">Volver</a>
+</div>
+{% endblock contenido %}

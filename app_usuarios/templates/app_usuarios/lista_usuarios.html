@@ -1,0 +1,26 @@
+{% extends 'genericos/base.html' %}
+
+{% block title_head %}
+<title>Lista de Usuarios</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+<h2>Lista de Usuarios</h2>
+{% endblock h1_header %}
+
+{% block contenido %}
+<div class="container my-8">
+    <ul>
+        {% for usuario in usuarios %}
+            <li>
+                {{ usuario.username }}
+                <a href="{% url 'app_usuarios:editar_usuario' usuario.id %}" class="btn btn-primary btn-sm">Editar</a>
+                <a href="{% url 'app_usuarios:eliminar_usuario' usuario.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'app_usuarios:crear_usuario' %}" class="btn btn-primary">Crear Usuario</a>
+    <a class="btn btn-secondary btn-sm" href={% url 'app_proyectos:inicio' %} role="submit">Volver</a> 
+</div>
+{% endblock contenido %}
